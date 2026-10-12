@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EASYPHOTO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>EASYPHOTO</h1>
+        <p>{{ config.app.tagline }}</p>
+      </div>
+      <div class="version-box">
+        <span>v{{ config.app.version }}</span>
+      </div>
+    </header>
+
+    <main class="main-area">
+      <aside class="sidebar">
+        <div class="panel">
+          <h3>Features</h3>
+          <ul id="featureList" class="feature-list"></ul>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <div class="tab-bar">
+          <button class="tab active" data-tab="passport">Passport Photo</button>
+          <button class="tab" data-tab="passport-text">Passport + Name/Date</button>
+          <button class="tab" data-tab="memorial">Sradhanjali</button>
+          <button class="tab" data-tab="camera">Camera</button>
+          <button class="tab" data-tab="print">Print</button>
+        </div>
+
+        <div class="tab-content active" id="passport">
+          <div class="card">
+            <div class="section-title">Passport Photo</div>
+            <div class="upload-row">
+              <input type="file" id="passportUpload" accept="image/*" />
+            </div>
+            <div class="image-stage passport-stage">
+              <div id="passportPreviewWrap" class="image-preview passenger-photo">
+                <img id="passportPreview" alt="Passport preview" />
+              </div>
+            </div>
+            <div class="controls-grid">
+              <label>
+                Background:
+                <select id="passportBg">
+                  <option value="white">White</option>
+                  <option value="lightblue">Light Blue</option>
+                  <option value="cream">Cream</option>
+                </select>
+              </label>
+              <label>
+                Quality:
+                <select id="passportQuality">
+                  <option value="72">72 DPI</option>
+                  <option value="150">150 DPI</option>
+                  <option value="300" selected>300 DPI</option>
+                </select>
+              </label>
+            </div>
+            <div class="button-row">
+              <button class="primary" id="passportDownload">Download</button>
+              <button class="secondary" id="passportPrint">Print</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="passport-text">
+          <div class="card">
+            <div class="section-title">Passport with Name and Date</div>
+            <div class="upload-row">
+              <input type="file" id="textPassportUpload" accept="image/*" />
+            </div>
+            <div class="image-stage passport-text-stage">
+              <div id="textPassportPreviewWrap" class="image-preview passport-name-photo">
+                <img id="textPassportPreview" alt="Passport with text" />
+                <div class="text-overlay">
+                  <div id="nameOverlay">Jayant Pawar</div>
+                  <div id="dateOverlay">01/01/2025</div>
+                </div>
+              </div>
+            </div>
+            <div class="controls-grid">
+              <label>
+                Full Name:
+                <input id="passportNameInput" type="text" value="Jayant Pawar" />
+              </label>
+              <label>
+                Date:
+                <input id="passportDateInput" type="text" value="01/01/2025" />
+              </label>
+            </div>
+            <div class="button-row">
+              <button class="primary" id="textPassportDownload">Download</button>
+              <button class="secondary" id="textPassportPrint">Print</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="memorial">
+          <div class="card">
+            <div class="section-title">Sradhanjali Memorial Card</div>
+            <div class="upload-row">
+              <input type="file" id="memorialUpload" accept="image/*" />
+            </div>
+            <div class="image-stage memorial-stage">
+              <div class="memorial-card" id="memorialCard">
+                <div class="top-flowers">🌼 🌺 🌼</div>
+                <div class="memorial-photo-wrap">
+                  <img id="memorialPreview" alt="Memorial photo" />
+                </div>
+                <div class="swargiy">स्वर्गीय</div>
+                <div id="memorialName" class="memorial-name">श्री नंदू</div>
+                <div class="divider"></div>
+                <div class="date-item">
+                  <div class="label">जन्म तिथि</div>
+                  <div id="birthDateText" class="value">01/01/2006</div>
+                </div>
+                <div class="date-item">
+                  <div class="label">स्वर्गवास तिथि</div>
+                  <div id="deathDateText" class="value">08/10/2024</div>
+                </div>
+                <div id="memorialQuote" class="quote">आपकी स्मृति हमारे साथ सदा रहेगी</div>
+                <div class="bottom-flowers">🌼 🌺 🌼</div>
+              </div>
+            </div>
+            <div class="controls-grid">
+              <label>
+                Name:
+                <input id="memorialNameInput" type="text" value="श्री नंदू" />
+              </label>
+              <label>
+                Birth date:
+                <input id="memorialBirthInput" type="text" value="01/01/2006" />
+              </label>
+              <label>
+                Death date:
+                <input id="memorialDeathInput" type="text" value="08/10/2024" />
+              </label>
+              <label>
+                Quote:
+                <input id="memorialQuoteInput" type="text" value="आपकी स्मृति हमारे साथ सदा रहेगी" />
+              </label>
+            </div>
+            <div class="button-row">
+              <button class="primary" id="memorialDownload">Download</button>
+              <button class="secondary" id="memorialPrint">Print</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="camera">
+          <div class="card">
+            <div class="section-title">Camera Capture</div>
+            <video id="cameraVideo" autoplay playsinline></video>
+            <div class="button-row">
+              <button class="primary" id="capturePhoto">Capture Photo</button>
+              <button class="secondary" id="switchCamera">Switch Camera</button>
+            </div>
+            <canvas id="cameraCanvas" class="hidden"></canvas>
+            <div class="camera-preview-wrap">
+              <img id="capturedImage" alt="Captured result" />
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="print">
+          <div class="card">
+            <div class="section-title">Print Layout</div>
+            <div class="controls-grid">
+              <label>
+                Paper size:
+                <select id="paperSizeSelect">
+                  <option value="4x6">4x6 Photo Paper</option>
+                  <option value="A5">A5 (Half Page)</option>
+                  <option value="A4">A4</option>
+                </select>
+              </label>
+              <label>
+                Copy count:
+                <select id="copyCountSelect">
+                  <option value="4">4 copies</option>
+                  <option value="6">6 copies</option>
+                  <option value="10" selected>10 copies</option>
+                </select>
+              </label>
+            </div>
+            <div class="print-layout" id="printLayout"></div>
+            <div class="button-row">
+              <button class="primary" id="printPreviewButton">Generate Preview</button>
+              <button class="secondary" id="printActionButton">Print</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="sidebar right-panel">
+        <div class="panel">
+          <h3>AI Assistant</h3>
+          <div id="chatBox" class="chat-box">
+            <div class="message bot">Hi! I can help make your passport or memorial image look better. Try: brighten, add name, change background, or set date.</div>
+          </div>
+          <div class="chat-input-row">
+            <input id="chatInput" type="text" placeholder="Ask for changes..." />
+            <button id="sendChat">Send</button>
+          </div>
+          <div class="quick-actions">
+            <button class="mini-btn" data-command="brighten">Brighten</button>
+            <button class="mini-btn" data-command="background white">Set white BG</button>
+            <button class="mini-btn" data-command="add name">Add name</button>
+            <button class="mini-btn" data-command="make memorial">Memorial card</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
